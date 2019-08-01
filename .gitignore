@@ -13,3 +13,9 @@
 /rethinkdb_data/
 /temp/
 /tmp/
+/res/*
+/build/*
+/bower.json
+/bower_components/*
+/gulpfile.json
+/gulpfile.js
