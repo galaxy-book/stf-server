@@ -1,0 +1,133 @@
+.widget-container.fluid-height(ng-controller='CrawlerCtrl')
+
+  .col-md-6.packery-item
+    .widget-container.fluid-height.stf-screenshots
+      .heading
+        .pull-right
+          button.btn.btn-primary-outline.btn-sm.transparent-border(
+            ng-click='zoom({min: 80, step: -50})',
+            ng-disabled='!screenshots.length')
+            i.fa.fa-minus
+
+          input(type='range', ng-model='screenShotSize', min='80', max='480', step='20',
+          ng-model-options='{ updateOn: "default blur", debounce: { default: 80, blur: 0} }',
+          ng-disabled='!screenshots.length').zoom-range
+
+          button.btn.btn-primary-outline.btn-sm.transparent-border(
+            ng-click='zoom({max: 480, step: 50})',
+            ng-disabled='!screenshots.length')
+            i.fa.fa-plus
+
+      .widget-content.padded
+        nothing-to-show(message='{{"No screenshots taken"|translate}}', icon='fa-camera', ng-show='!screenshots.length')
+
+        ul.screenshots-icon-view.clear-fix.selectable(ng-show='screenshots.length')
+          li.screenshots-icon-item(ng-repeat='i in error_screen_indexs track by $index').cursor-select
+            //- h5 {{ device.name }}
+            h6 {{$index}}: {{pic_click_path_list[i]}}
+            a(target='_blank')
+              img(ng-src='{{screenshots[i]}}' style='width: {{screenShotSize}}px;')
+        .clearfix
+
+  .col-md-6.packery-item
+    .widget-content.padded-small
+      table.table.table-condensed.table-hover.table-infocard
+        button.btn.btn-primary-outline(ng-click='startCraw()', style='border：2；align:center;') 开始深度遍历
+        button.btn.btn-primary-outline(ng-click='stopCraw()', style='border：2；align:center;') 停止深度遍历
+        button.btn.btn-primary-outline(ng-click='clearCraw()', style='border：2；align:center;') 清空深度遍历结果
+        button.btn.btn-primary-outline(ng-click='downloadResult()', style='border：2；align:center;') 结果下载
+      
+      .more-filter-control.more-filter-hide.div-right(ng-click='hideShowConf()')
+        a.more-arrow.more-arrow-top
+        i 显示/隐藏配置项
+      .widget-container.device-statics(ng-show='showConf')
+        table.table.table-condensed.table-hover.table-infocard
+          tbody
+            tr
+              td(translate) 图片验证接口url
+              td
+                input(ng-model="predict_url")
+            tr
+              td(translate) 崩溃日志路径
+              td
+                input(ng-model="crash_log_path")
+            tr
+              td(translate) 最大点击数
+              td 
+                input(ng-model="max_click")
+            tr
+              td(translate) 最大层数
+              td 
+                input(ng-model="max_level")
+            tr
+              td(translate) 操作等待间隔
+              td 
+                input(ng-model="wait_sec")
+            tr
+              td(translate) 安全键盘id
+              td 
+                input(ng-model="secure_keyboard_id")
+            tr
+              td(translate) 密码
+              td 
+                input(ng-model="password")
+            tr
+              td(translate) 主页面包含id
+              td 
+                input(ng-model="main_page_ele")
+            tr
+              td(translate) 短信验证码输入框包含id
+              td 
+                input(ng-model="msg_code_id")
+            tr
+              td(translate) 验证码获取网址
+              td 
+                input(ng-model="verify_code_url")
+            tr
+              td(translate) 电话号码
+              td 
+                input(ng-model="phone_num")
+        table.table.table-condensed.table-hover.table-infocard
+          tbody
+            tr
+              td(translate) 输入框默认值
+              td 
+                input(ng-model="filling_edittext_default")
+            tr
+              td(translate) 输入框自定义值
+              td
+                textarea(ng-model="edittext_content_settings_string",rows=10,cols=30)
+            tr
+              td
+                button.btn.btn-primary-outline(ng-click='loadEditTextCotentSettings()', style='border：2；align:center;') 更新输入框自定义值
+        table.table.table-condensed.table-hover.table-infocard
+          tbody
+            tr
+              td(translate) 黑名单
+              td
+                textarea(ng-model="black_list_string",rows=8,cols=30)
+            tr
+              td
+                button.btn.btn-primary-outline(ng-click='loadBlackList()', style='border：2；align:center;') 更新黑名单
+        table.table.table-condensed.table-hover.table-infocard
+          tbody
+            tr
+              td(translate) 白名单
+              td
+                textarea(ng-model="white_list_string",rows=8,cols=30)
+            tr
+              td
+                button.btn.btn-primary-outline(ng-click='loadWhiteList()', style='border：2；align:center;') 更新白名单
+    .div 遍历控件树：
+    .widget-content.padded-small
+      #uiviewer-tree.tree.tree-node(ng-repeat="node in p_tree",ng-include="'recursion'")
+    .widget-content.padded-small
+
+    script#recursion(type='text/ng-template').
+      <div class="tree-heading">
+      <i class="{{node.isCollapsed ? 'fa fa-angle-double-right' : 'fa fa-angle-double-down'}} {{node.children.length?'':'noChildren'}}" ng-click="node.isCollapsed = !node.isCollapsed"></i>
+      <span class="{{node.selected?'selected':''}}">{{node.text}}<span>
+      </div>
+      <div class="tree-body" uib-collapse="node.isCollapsed" >
+      <div ng-repeat="node in node.children" ng-include="'recursion'" class="tree-node" style='margin-left:10px;'></div>
+      </div>

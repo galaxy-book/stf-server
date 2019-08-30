@@ -7,15 +7,11 @@
 /*.tgz
 /.env
 /node_modules/
-/res/bower_components/
+/res/bower_components/*
+/bower_components/*
 /res/build/
 /res/test_out/
 /rethinkdb_data/
 /temp/
 /tmp/
-/res/*
 /build/*
-/bower.json
-/bower_components/*
-/gulpfile.json
-/gulpfile.js

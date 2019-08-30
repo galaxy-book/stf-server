@@ -1,0 +1,59 @@
+.device-list-details-content table {
+  white-space: nowrap;
+}
+
+.device-list-details-content .device-list-product,
+.device-list-details-content .device-list-carrier {
+  white-space: normal;
+}
+
+.device-list-details-content .progress {
+  margin-bottom: 0 !important;
+  height: 17px !important;
+}
+
+.device-list-details-content .device-status.state-available {
+  font-weight: 600;
+}
+
+
+.btn-outline-rent {
+  color: #BC8F8F;
+  
+}
+
+.pointer {
+  cursor: pointer;
+}
+.pointer-not-allowed {
+  cursor:not-allowed
+}
+.black-font-color{
+  color: #757575
+}
+.rowhover:hover{
+  background-color:#bbb
+}
+
+.WheatColor{
+  background-color: #F5DEB3
+}
+.Gainsboro{
+  background-color:	#DCDCDC
+}
+.maintaincolor{
+  background-color: #ffcc33
+}
+
+.a-disabled{
+  pointer-events: none;
+  color:gray;
+}
+
+.device-back-status{
+  color: blue
+}
+
+.device-is-offline {
+  display: none
+}

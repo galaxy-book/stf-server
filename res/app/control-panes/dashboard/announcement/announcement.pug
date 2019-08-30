@@ -1,0 +1,5 @@
+.widget-container(ng-controller='AnnounceControl')
+  div.alignleft 公告栏
+  h4.selectable(align="center") {{article.title}}
+  div.selectable
+    textarea.readtextarea(name="announce"  rows="12" disabled="disabled" ng-model="article.content")
